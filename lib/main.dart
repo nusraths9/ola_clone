@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:search_map_place/search_map_place.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import './travelModesList.dart';
+
 String apiKEY;
 
 void main() => runApp(MyApp());
@@ -32,6 +34,9 @@ class MapSampleState extends State<MapSample> {
     zoom: 14.0000,
   );
   static bool colourChange = false;
+  static bool colourChangeDaily = false;
+  static bool colourChangeRentals = false;
+  static bool colourChangeOutStation = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,18 +49,104 @@ class MapSampleState extends State<MapSample> {
                 child: Container(
                   child: Row(
                     children: <Widget>[
-                      Icon(
-                        Icons.menu,
-                        color: Colors.lightGreen,
+                      Flexible(
+                        flex: 2,
+                        child: Container(
+                          child: MaterialButton(
+                              child: Icon(
+                                Icons.menu,
+                                color: Colors.black54,
+                                size: 30,
+                              ),
+                              onPressed: () {}),
+                        ),
                       ),
-                      MaterialButton(
-                        child: Text('New button'),
-                        onPressed: () {
-                          //Do something
-//                      highlightColor:
-//                      Colors.redAccent;
-                        },
-                      )
+                      Flexible(
+                        flex: 8,
+                        child: Container(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: <Widget>[
+                              Container(
+//                                  width:50,
+                                decoration: new BoxDecoration(
+                                    color: colourChangeDaily
+                                        ? Colors.lightGreen
+                                        : null,
+                                    borderRadius: new BorderRadius.all(
+                                        const Radius.circular(50.0))),
+
+                                child: MaterialButton(
+                                    minWidth: 10.0,
+                                    child: Text(
+                                      "Daily",
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        colourChangeDaily = !colourChangeDaily;
+                                        colourChangeRentals = false;
+                                        colourChangeOutStation = false;
+                                      });
+                                    }),
+                              ),
+                              Container(
+                                decoration: new BoxDecoration(
+                                    color: colourChangeRentals
+                                        ? Colors.lightGreen
+                                        : null,
+                                    borderRadius: new BorderRadius.all(
+                                        const Radius.circular(40.0))),
+                                child: MaterialButton(
+                                    minWidth: 10.0,
+                                    child: Text(
+                                      "Rentals",
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        colourChangeDaily = false;
+                                        colourChangeRentals =
+                                            !colourChangeRentals;
+                                        colourChangeOutStation = false;
+                                      });
+                                    }),
+                              ),
+                              Container(
+                                decoration: new BoxDecoration(
+                                    color: colourChangeOutStation
+                                        ? Colors.lightGreen
+                                        : null,
+                                    borderRadius: new BorderRadius.all(
+                                        const Radius.circular(40.0))),
+                                child: MaterialButton(
+                                    minWidth: 10.0,
+                                    child: Text(
+                                      "Outstation",
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        colourChangeDaily = false;
+                                        colourChangeRentals = false;
+                                        colourChangeOutStation =
+                                            !colourChangeOutStation;
+                                      });
+                                    }),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Flexible(
+                        flex: 2,
+                        child: Container(
+                          child: MaterialButton(
+                              child: Icon(
+                                Icons.notifications,
+                                color: Colors.black54,
+                                size: 30,
+                              ),
+                              onPressed: () {}),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -119,201 +210,199 @@ class MapSampleState extends State<MapSample> {
               ),
               Flexible(
                 flex: 2,
-                child:
+                child: TravelModesList()
 //                Row(
 //                  children: <Widget>[
-                    Container(
-                  child: ListView(
-//                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    scrollDirection: Axis.horizontal,
-                    padding: EdgeInsets.all(10),
+                    // Container(
+//                   child: ListView(
+// //                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                     scrollDirection: Axis.horizontal,
+//                     padding: EdgeInsets.all(10),
 
-
-                    children: <Widget>[
-
-                      SizedBox(width: 30,),
-                      Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Text("3 min"),
-                            Container(
-                              decoration: new BoxDecoration(
-                                  color:
-                                      colourChange ? Colors.blue : Colors.green,
-                                  borderRadius: new BorderRadius.all(
-                                      const Radius.circular(40.0)
-                                  )
-                              ),
-                              child: IconButton(
-                                icon: Icon(Icons.android),
-                                color: Colors.black38,
-                                onPressed: () {
-                                  setState(() {
-                                    colourChange = !colourChange;
-                                  });
-                                },
-                              ),
-                            ),
-                            Text("Share")
-                          ],
-                        ),
-//                        width: 160.0,
-//                            color: Colors.blue,
-                      ),
-                      SizedBox(width: 30,),
-                      Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Text("3 min"),
-                            Container(
-                              decoration: new BoxDecoration(
-                                  color:
-                                  colourChange ? Colors.blue : Colors.green,
-                                  borderRadius: new BorderRadius.all(
-                                      const Radius.circular(40.0)
-                                  )
-                              ),
-                              child: IconButton(
-                                icon: Icon(Icons.android),
-                                color: Colors.black38,
-                                onPressed: () {
-                                  setState(() {
-                                    colourChange = !colourChange;
-                                  });
-                                },
-                              ),
-                            ),
-                            Text("Share")
-                          ],
-                        ),
-//                        width: 160.0,
-//                            color: Colors.blue,
-                      ),
-                      SizedBox(width: 30,),
-                      Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Text("3 min"),
-                            Container(
-                              decoration: new BoxDecoration(
-                                  color:
-                                  colourChange ? Colors.blue : Colors.green,
-                                  borderRadius: new BorderRadius.all(
-                                      const Radius.circular(40.0)
-                                  )
-                              ),
-                              child: IconButton(
-                                icon: Icon(Icons.android),
-                                color: Colors.black38,
-                                onPressed: () {
-                                  setState(() {
-                                    colourChange = !colourChange;
-                                  });
-                                },
-                              ),
-                            ),
-                            Text("Share")
-                          ],
-                        ),
-//                        width: 160.0,
-//                            color: Colors.blue,
-                      ),
-                      SizedBox(width: 30,),
-                      Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Text("3 min"),
-                            Container(
-                              decoration: new BoxDecoration(
-                                  color:
-                                  colourChange ? Colors.blue : Colors.green,
-                                  borderRadius: new BorderRadius.all(
-                                      const Radius.circular(40.0)
-                                  )
-                              ),
-                              child: IconButton(
-                                icon: Icon(Icons.android),
-                                color: Colors.black38,
-                                onPressed: () {
-                                  setState(() {
-                                    colourChange = !colourChange;
-                                  });
-                                },
-                              ),
-                            ),
-                            Text("Share")
-                          ],
-                        ),
-//                        width: 160.0,
-//                            color: Colors.blue,
-                      ),
-                      SizedBox(width: 30,),
-                      Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Text("3 min"),
-                            Container(
-                              decoration: new BoxDecoration(
-                                  color:
-                                  colourChange ? Colors.blue : Colors.green,
-                                  borderRadius: new BorderRadius.all(
-                                      const Radius.circular(40.0)
-                                  )
-                              ),
-                              child: IconButton(
-                                icon: Icon(Icons.android),
-                                color: Colors.black38,
-                                onPressed: () {
-                                  setState(() {
-                                    colourChange = !colourChange;
-                                  });
-                                },
-                              ),
-                            ),
-                            Text("Share")
-                          ],
-                        ),
-//                        width: 160.0,
-//                            color: Colors.blue,
-                      ),
-                      SizedBox(width: 30,),
-                      Container(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: <Widget>[
-                            Text("3 min"),
-                            Container(
-                              decoration: new BoxDecoration(
-                                  color:
-                                  colourChange ? Colors.blue : Colors.green,
-                                  borderRadius: new BorderRadius.all(
-                                      const Radius.circular(40.0)
-                                  )
-                              ),
-                              child: IconButton(
-                                icon: Icon(Icons.android),
-                                color: Colors.black38,
-                                onPressed: () {
-                                  setState(() {
-                                    colourChange = !colourChange;
-                                  });
-                                },
-                              ),
-                            ),
-                            Text("Share")
-                          ],
-                        ),
-//                        width: 160.0,
-//                            color: Colors.blue,
-                      ),
-                    ],
-                  ),
-                ),
+//                     children: <Widget>[
+//                       SizedBox(
+//                         width: 30,
+//                       ),
+//                       Container(
+//                         child: Column(
+//                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                           children: <Widget>[
+//                             Text("3 min"),
+//                             Container(
+//                               decoration: new BoxDecoration(
+//                                   color:
+//                                       colourChange ? Colors.blue : Colors.green,
+//                                   borderRadius: new BorderRadius.all(
+//                                       const Radius.circular(40.0))),
+//                               child: IconButton(
+//                                 icon: Icon(Icons.android),
+//                                 color: Colors.black38,
+//                                 onPressed: () {
+//                                   setState(() {
+//                                     colourChange = !colourChange;
+//                                   });
+//                                 },
+//                               ),
+//                             ),
+//                             Text("Share")
+//                           ],
+//                         ),
+// //                        width: 160.0,
+// //                            color: Colors.blue,
+//                       ),
+//                       SizedBox(
+//                         width: 30,
+//                       ),
+//                       Container(
+//                         child: Column(
+//                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                           children: <Widget>[
+//                             Text("3 min"),
+//                             Container(
+//                               decoration: new BoxDecoration(
+//                                   color:
+//                                       colourChange ? Colors.blue : Colors.green,
+//                                   borderRadius: new BorderRadius.all(
+//                                       const Radius.circular(40.0))),
+//                               child: IconButton(
+//                                 icon: Icon(Icons.android),
+//                                 color: Colors.black38,
+//                                 onPressed: () {
+//                                   setState(() {
+//                                     colourChange = !colourChange;
+//                                   });
+//                                 },
+//                               ),
+//                             ),
+//                             Text("Share")
+//                           ],
+//                         ),
+// //                        width: 160.0,
+// //                            color: Colors.blue,
+//                       ),
+//                       SizedBox(
+//                         width: 30,
+//                       ),
+//                       Container(
+//                         child: Column(
+//                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                           children: <Widget>[
+//                             Text("3 min"),
+//                             Container(
+//                               decoration: new BoxDecoration(
+//                                   color:
+//                                       colourChange ? Colors.blue : Colors.green,
+//                                   borderRadius: new BorderRadius.all(
+//                                       const Radius.circular(40.0))),
+//                               child: IconButton(
+//                                 icon: Icon(Icons.android),
+//                                 color: Colors.black38,
+//                                 onPressed: () {
+//                                   setState(() {
+//                                     colourChange = !colourChange;
+//                                   });
+//                                 },
+//                               ),
+//                             ),
+//                             Text("Share")
+//                           ],
+//                         ),
+// //                        width: 160.0,
+// //                            color: Colors.blue,
+//                       ),
+//                       SizedBox(
+//                         width: 30,
+//                       ),
+//                       Container(
+//                         child: Column(
+//                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                           children: <Widget>[
+//                             Text("3 min"),
+//                             Container(
+//                               decoration: new BoxDecoration(
+//                                   color:
+//                                       colourChange ? Colors.blue : Colors.green,
+//                                   borderRadius: new BorderRadius.all(
+//                                       const Radius.circular(40.0))),
+//                               child: IconButton(
+//                                 icon: Icon(Icons.android),
+//                                 color: Colors.black38,
+//                                 onPressed: () {
+//                                   setState(() {
+//                                     colourChange = !colourChange;
+//                                   });
+//                                 },
+//                               ),
+//                             ),
+//                             Text("Share")
+//                           ],
+//                         ),
+// //                        width: 160.0,
+// //                            color: Colors.blue,
+//                       ),
+//                       SizedBox(
+//                         width: 30,
+//                       ),
+//                       Container(
+//                         child: Column(
+//                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                           children: <Widget>[
+//                             Text("3 min"),
+//                             Container(
+//                               decoration: new BoxDecoration(
+//                                   color:
+//                                       colourChange ? Colors.blue : Colors.green,
+//                                   borderRadius: new BorderRadius.all(
+//                                       const Radius.circular(40.0))),
+//                               child: IconButton(
+//                                 icon: Icon(Icons.android),
+//                                 color: Colors.black38,
+//                                 onPressed: () {
+//                                   setState(() {
+//                                     colourChange = !colourChange;
+//                                   });
+//                                 },
+//                               ),
+//                             ),
+//                             Text("Share")
+//                           ],
+//                         ),
+// //                        width: 160.0,
+// //                            color: Colors.blue,
+//                       ),
+//                       SizedBox(
+//                         width: 30,
+//                       ),
+//                       Container(
+//                         child: Column(
+//                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                           children: <Widget>[
+//                             Text("3 min"),
+//                             Container(
+//                               decoration: new BoxDecoration(
+//                                   color:
+//                                       colourChange ? Colors.blue : Colors.green,
+//                                   borderRadius: new BorderRadius.all(
+//                                       const Radius.circular(40.0))),
+//                               child: IconButton(
+//                                 icon: Icon(Icons.android),
+//                                 color: Colors.black38,
+//                                 onPressed: () {
+//                                   setState(() {
+//                                     colourChange = !colourChange;
+//                                   });
+//                                 },
+//                               ),
+//                             ),
+//                             Text("Share")
+//                           ],
+//                         ),
+// //                        width: 160.0,
+// //                            color: Colors.blue,
+//                       ),
+//                     ],
+//                   ),
+                // ),
 //                  ],
 //                ),
               ),
