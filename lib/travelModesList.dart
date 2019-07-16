@@ -1,40 +1,61 @@
 import 'package:flutter/material.dart';
-import './travelMode.dart';
 
-class TravelModesList extends StatelessWidget {
+class TravelModesList extends StatefulWidget {
+  @override
+  State<TravelModesList> createState() => _TravelModesList();
+}
+
+class _TravelModesList extends State<TravelModesList> {
   bool isAnySelected = false;
   static bool isSelected = false;
 
-  List<Widget> modes = [
-        SizedBox( width: 15 ),
-        TravelMode('A', Icons.android, 'abc', isSelected),
-        SizedBox( width: 30 ),
-        TravelMode('B', Icons.android, 'abc', isSelected),
-        SizedBox( width: 30 ),
-        TravelMode('C', Icons.android, 'abc', isSelected),
-        SizedBox( width: 30 ),
-        TravelMode('D', Icons.android, 'abc', isSelected),
-        SizedBox( width: 30 ),
-        TravelMode('E', Icons.android, 'abc', isSelected),
-        SizedBox( width: 30 ),
-        TravelMode('F', Icons.android, 'abc', isSelected),
-        SizedBox( width: 30 ),
-        TravelMode('G', Icons.android, 'abc', isSelected),
-        SizedBox( width: 30 ),
-        TravelMode('H', Icons.android, 'abc', isSelected),
-        SizedBox( width: 30 ),
-        TravelMode('I', Icons.android, 'abc', isSelected),
-        SizedBox( width: 15 )
-      ];
+  List modeData = [
+    {'modeName': 'Prime', 'modeTime': '9 min', 'modeIcon': 'ic_prime'},
+    {'modeName': 'Mini', 'modeTime': '7 min', 'modeIcon': 'ic_mini'},
+    {'modeName': 'Auto', 'modeTime': '1 min', 'modeIcon': 'ic_auto'},
+    {'modeName': 'SUV', 'modeTime': '5 min', 'modeIcon': 'ic_suv'},
+    {'modeName': 'Micro', 'modeTime': '11 min', 'modeIcon': 'ic_micro'},
+    {'modeName': 'Rentals', 'modeTime': '3 min', 'modeIcon': 'ic_rentals'},
+    {'modeName': 'Share', 'modeTime': '6 min', 'modeIcon': 'ic_share'},
+  ];
 
   callback(data) {}
 
+  int _selectedIndex = 0;
+
+  _onSelected(int index) {
+    setState(() => _selectedIndex = index);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: EdgeInsets.all(10),
-      scrollDirection: Axis.horizontal,
-      children: this.modes,
-    );
+    return ListView.builder(
+        scrollDirection: Axis.horizontal,
+        physics: const ClampingScrollPhysics(),
+        shrinkWrap: true,
+        itemCount: modeData.length,
+        itemBuilder: (context, index) => GestureDetector(
+            onTap: () => _onSelected(index),
+            child: Padding(
+                padding: EdgeInsets.only(right: 30, left: index == 0 ? 15 : 0),
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      Text(modeData[index]['modeTime']),
+                      Container(
+                          decoration: new BoxDecoration(
+                              color: _selectedIndex != null &&
+                                      _selectedIndex == index
+                                  ? Colors.lime[400]
+                                  : null,
+                              borderRadius: new BorderRadius.all(
+                                  const Radius.circular(40.0))),
+                          child: IconButton(
+                            icon: Image.asset(
+                                'lib/images/cars/category/${modeData[index]['modeIcon']}.png'),
+                            color: Colors.black38,
+                          )),
+                      Text(modeData[index]['modeName'])
+                    ]))));
   }
 }
