@@ -6,8 +6,6 @@ class TravelModesList extends StatefulWidget {
 }
 
 class _TravelModesList extends State<TravelModesList> {
-  bool isAnySelected = false;
-  static bool isSelected = false;
 
   List modeData = [
     {'modeName': 'Prime', 'modeTime': '9 min', 'modeIcon': 'ic_prime'},
@@ -18,8 +16,6 @@ class _TravelModesList extends State<TravelModesList> {
     {'modeName': 'Rentals', 'modeTime': '3 min', 'modeIcon': 'ic_rentals'},
     {'modeName': 'Share', 'modeTime': '6 min', 'modeIcon': 'ic_share'},
   ];
-
-  callback(data) {}
 
   int _selectedIndex = 0;
 

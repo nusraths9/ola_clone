@@ -6,6 +6,7 @@ import 'package:search_map_place/search_map_place.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 import './travelModesList.dart';
+import './navigationOptions.dart';
 
 String apiKEY;
 
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Search Map Place Demo',
+      debugShowCheckedModeBanner: false,
       home: MapSample(),
     );
   }
@@ -63,75 +65,76 @@ class MapSampleState extends State<MapSample> {
                       ),
                       Flexible(
                         flex: 8,
-                        child: Container(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: <Widget>[
-                              Container(
-                                decoration: new BoxDecoration(
-                                    color: colourChangeDaily
-                                        ? Colors.lime[400]
-                                        : null,
-                                    borderRadius: new BorderRadius.all(
-                                        const Radius.circular(50.0))),
-                                child: MaterialButton(
-                                    minWidth: 10.0,
-                                    child: Text(
-                                      "Daily",
-                                    ),
-                                    onPressed: () {
-                                      setState(() {
-                                        colourChangeDaily = !colourChangeDaily;
-                                        colourChangeRentals = false;
-                                        colourChangeOutStation = false;
-                                      });
-                                    }),
-                              ),
-                              Container(
-                                decoration: new BoxDecoration(
-                                    color: colourChangeRentals
-                                        ? Colors.lime[400]
-                                        : null,
-                                    borderRadius: new BorderRadius.all(
-                                        const Radius.circular(40.0))),
-                                child: MaterialButton(
-                                    minWidth: 10.0,
-                                    child: Text(
-                                      "Rentals",
-                                    ),
-                                    onPressed: () {
-                                      setState(() {
-                                        colourChangeDaily = false;
-                                        colourChangeRentals =
-                                            !colourChangeRentals;
-                                        colourChangeOutStation = false;
-                                      });
-                                    }),
-                              ),
-                              Container(
-                                decoration: new BoxDecoration(
-                                    color: colourChangeOutStation
-                                        ? Colors.lime[400]
-                                        : null,
-                                    borderRadius: new BorderRadius.all(
-                                        const Radius.circular(40.0))),
-                                child: MaterialButton(
-                                    minWidth: 10.0,
-                                    child: Text(
-                                      "Outstation",
-                                    ),
-                                    onPressed: () {
-                                      setState(() {
-                                        colourChangeDaily = false;
-                                        colourChangeRentals = false;
-                                        colourChangeOutStation =
-                                            !colourChangeOutStation;
-                                      });
-                                    }),
-                              ),
-                            ],
-                          ),
-                        ),
+                        child: NavigationOptions(),
+                        // Container(
+                          // child: Row(
+                          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          //   children: <Widget>[
+                          //     Container(
+                          //       decoration: new BoxDecoration(
+                          //           color: colourChangeDaily
+                          //               ? Colors.lime[400]
+                          //               : null,
+                          //           borderRadius: new BorderRadius.all(
+                          //               const Radius.circular(50.0))),
+                          //       child: MaterialButton(
+                          //           minWidth: 10.0,
+                          //           child: Text(
+                          //             "Daily",
+                          //           ),
+                          //           onPressed: () {
+                          //             setState(() {
+                          //               colourChangeDaily = !colourChangeDaily;
+                          //               colourChangeRentals = false;
+                          //               colourChangeOutStation = false;
+                          //             });
+                          //           }),
+                          //     ),
+                          //     Container(
+                          //       decoration: new BoxDecoration(
+                          //           color: colourChangeRentals
+                          //               ? Colors.lime[400]
+                          //               : null,
+                          //           borderRadius: new BorderRadius.all(
+                          //               const Radius.circular(40.0))),
+                          //       child: MaterialButton(
+                          //           minWidth: 10.0,
+                          //           child: Text(
+                          //             "Rentals",
+                          //           ),
+                          //           onPressed: () {
+                          //             setState(() {
+                          //               colourChangeDaily = false;
+                          //               colourChangeRentals =
+                          //                   !colourChangeRentals;
+                          //               colourChangeOutStation = false;
+                          //             });
+                          //           }),
+                          //     ),
+                          //     Container(
+                          //       decoration: new BoxDecoration(
+                          //           color: colourChangeOutStation
+                          //               ? Colors.lime[400]
+                          //               : null,
+                          //           borderRadius: new BorderRadius.all(
+                          //               const Radius.circular(40.0))),
+                          //       child: MaterialButton(
+                          //           minWidth: 10.0,
+                          //           child: Text(
+                          //             "Outstation",
+                          //           ),
+                          //           onPressed: () {
+                          //             setState(() {
+                          //               colourChangeDaily = false;
+                          //               colourChangeRentals = false;
+                          //               colourChangeOutStation =
+                          //                   !colourChangeOutStation;
+                          //             });
+                          //           }),
+                          //     ),
+                          //   ],
+                          // ),
+                        // ),
                       ),
                       Flexible(
                         flex: 2,
